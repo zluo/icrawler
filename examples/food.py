@@ -92,7 +92,7 @@ def load_keywords_new():
             f.write('\n')
     pass
 
-load_keywords_new()
+#load_keywords_new()
 
-for keyword in new_keywords:
+for keyword in keywords:
     clawer.claw(keyword, 1000)

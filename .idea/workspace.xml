@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efcbbfb1-9a81-48fc-846d-1d53e1c2f1f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/food.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/keywords_done.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icrawler/download_tasks.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icrawler/builtin/google.py" beforeDir="false" afterPath="$PROJECT_DIR$/icrawler/builtin/google.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icrawler/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/icrawler/crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icrawler/downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/icrawler/downloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icrawler/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/icrawler/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/download_tasks.log" beforeDir="false" afterPath="$PROJECT_DIR$/examples/download_tasks.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/keywords_done.log" beforeDir="false" afterPath="$PROJECT_DIR$/examples/keywords_done.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/examples/food.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="196">
-              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+              <caret line="98" selection-start-line="98" selection-end-line="98" />
               <folding>
                 <element signature="e#10#57#0" expanded="true" />
                 <marker date="1546989405806" expanded="true" signature="3227:3926" ph="..." />
@@ -89,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/keywords_new.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="255">
-              <caret line="392" column="11" selection-start-line="392" selection-start-column="11" selection-end-line="392" selection-end-column="11" />
+            <state relative-caret-position="165">
+              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -243,18 +237,6 @@
             <path>
               <item name="icrawler" type="b2602c69:ProjectViewProjectNode" />
               <item name="icrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="icrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="builtin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="icrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="icrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="icrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="icrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="icrawler" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -378,8 +360,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="403" y="1465" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14665191" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14665191" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -390,7 +373,7 @@
       <window_info id="Job Explorer" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.61333334" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.65" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -528,7 +511,7 @@
     <entry file="file://$PROJECT_DIR$/examples/food.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
-          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
           <folding>
             <element signature="e#10#57#0" expanded="true" />
             <marker date="1546989405806" expanded="true" signature="3227:3926" ph="..." />
@@ -604,8 +587,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/keywords_new.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="255">
-          <caret line="392" column="11" selection-start-line="392" selection-start-column="11" selection-end-line="392" selection-end-column="11" />
+        <state relative-caret-position="165">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
         </state>
       </provider>
     </entry>
