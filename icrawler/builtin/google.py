@@ -134,7 +134,7 @@ class GoogleFeeder(Feeder):
             if language:
                 params['lr'] = 'lang_' + language
             url = base_url + urlencode(params)
-            self.out_queue.put(url)
+            self.out_queue.put((keyword, url))
             self.logger.debug('put url to url_queue: {}'.format(url))
 
 

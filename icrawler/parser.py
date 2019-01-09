@@ -69,7 +69,7 @@ class Parser(ThreadPool):
                 break
             # get the page url
             try:
-                url = self.in_queue.get(timeout=queue_timeout)
+                keyword, url = self.in_queue.get(timeout=queue_timeout)
             except queue.Empty:
                 if self.signal.get('feeder_exited'):
                     self.logger.info(
@@ -105,12 +105,13 @@ class Parser(ThreadPool):
                         while not self.signal.get('reach_max_num'):
                             try:
                                 if isinstance(task, dict):
+                                    task['keyword'] = keyword
                                     self.output(task, timeout=1)
                                 elif isinstance(task, str):
                                     # this case only work for GreedyCrawler,
                                     # which need to feed the url back to
                                     # url_queue, dirty implementation
-                                    self.input(task, timeout=1)
+                                    self.input((keyword, task), timeout=1)
                             except queue.Full:
                                 time.sleep(1)
                             except Exception as e:

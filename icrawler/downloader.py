@@ -8,6 +8,7 @@ from six.moves import queue
 from six.moves.urllib.parse import urlparse
 
 from icrawler.utils import ThreadPool
+import hashlib
 
 
 class Downloader(ThreadPool):
@@ -31,7 +32,7 @@ class Downloader(ThreadPool):
     def __init__(self, thread_num, signal, session, storage):
         """Init Parser with some shared variables."""
         super(Downloader, self).__init__(
-            thread_num, out_queue=None, name='downloader')
+            thread_num, name='downloader')
         self.signal = signal
         self.session = session
         self.storage = storage
@@ -73,9 +74,10 @@ class Downloader(ThreadPool):
             Filename with extension.
         """
         url_path = urlparse(task['file_url'])[2]
+        file_idx = hashlib.md5(url_path).hexdigest()
         extension = url_path.split('.')[-1] if '.' in url_path else default_ext
-        file_idx = self.fetched_num + self.file_idx_offset
-        return '{:06d}.{}'.format(file_idx, extension)
+        #file_idx = self.fetched_num + self.file_idx_offset
+        return '{:032d}.{}'.format(file_idx, extension)
 
     def reach_max_num(self):
         """Check if downloaded images reached max num.
@@ -109,6 +111,7 @@ class Downloader(ThreadPool):
             **kwargs: reserved arguments for overriding.
         """
         file_url = task['file_url']
+        keyword = task['keyword']
         task['success'] = False
         task['filename'] = None
         retry = max_retry
@@ -146,6 +149,7 @@ class Downloader(ThreadPool):
                 self.storage.write(filename, response.content)
                 task['success'] = True
                 task['filename'] = filename
+                self.output(task, timeout=1)
                 break
             finally:
                 retry -= 1
@@ -214,6 +218,8 @@ class Downloader(ThreadPool):
                 self.process_meta(task)
                 self.in_queue.task_done()
         self.logger.info('thread {} exit'.format(current_thread().name))
+        task['done'] = True
+        self.output(task)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.logger.info('all downloader threads exited')
@@ -262,8 +268,9 @@ class ImageDownloader(Downloader):
                 extension = default_ext
         else:
             extension = default_ext
-        file_idx = self.fetched_num + self.file_idx_offset
-        return '{:06d}.{}'.format(file_idx, extension)
+        url_path = urlparse(task['file_url'])[2]
+        file_idx = (hashlib.md5(url_path).hexdigest())
+        return str(file_idx) + '.' + extension
 
     def worker_exec(self,
                     max_num,

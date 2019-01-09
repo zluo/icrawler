@@ -10,6 +10,45 @@ from icrawler import Downloader, Feeder, Parser
 from icrawler import storage as storage_package
 from icrawler.storage import BaseStorage
 from icrawler.utils import ProxyPool, Session, Signal
+from icrawler.utils import ThreadPool
+from six.moves import queue
+
+class Recorder(ThreadPool):
+    """Base class for record keyword, url and filename in files.
+    """
+
+    def __init__(self):
+        """Init Feeder with some shared variables."""
+        super(Recorder, self).__init__(
+            thread_num=1, out_queue=None, name='recorder')
+
+    def record(self, **kwargs):
+
+        while True:
+            try:
+
+                task = self.in_queue.get(timeout=1)
+                if task.get('done', False):
+                    print '----------Finishing Recording------------'
+                    break
+                else:
+                    with open('download_tasks.log', 'a') as f:
+                        f.write(str(task))
+                        f.write('\n')
+            except queue.Empty:
+                    continue
+            except Exception, e:
+                print e
+                continue
+        pass
+
+    def worker_exec(self, **kwargs):
+        """Target function of workers"""
+        self.record(**kwargs)
+
+    def __exit__(self):
+        self.logger.info('all feeder threads exited')
+
 
 
 class Crawler(object):
@@ -29,6 +68,7 @@ class Crawler(object):
                  feeder_cls=Feeder,
                  parser_cls=Parser,
                  downloader_cls=Downloader,
+                 recorder_cls=Recorder,
                  feeder_threads=1,
                  parser_threads=1,
                  downloader_threads=1,
@@ -70,8 +110,9 @@ class Crawler(object):
         self.downloader = downloader_cls(downloader_threads, self.signal,
                                          self.session, self.storage,
                                          **downloader_kwargs)
+        self.recorder = recorder_cls()
         # connect all components
-        self.feeder.connect(self.parser).connect(self.downloader)
+        self.feeder.connect(self.parser).connect(self.downloader).connect(self.recorder)
 
     def set_logger(self, log_level=logging.INFO):
         """Configure the logger with log_level."""
@@ -185,6 +226,10 @@ class Crawler(object):
                          self.downloader.thread_num)
         self.downloader.start(**downloader_kwargs)
 
+        self.logger.info('starting %d recorder threads...', 1)
+
+        self.recorder.start()
+
         while True:
             if not self.feeder.is_alive():
                 self.signal.set(feeder_exited=True)
@@ -202,3 +247,8 @@ class Crawler(object):
             self.downloader.clear_buffer(True)
 
         self.logger.info('Crawling task done!')
+
+
+
+
+
